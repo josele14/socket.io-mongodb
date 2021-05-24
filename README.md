@@ -8,7 +8,7 @@ Se instalan las dependencias
 - npm install express@4
 
 ### Configurar servidor
-Utilizamos index.js. Añadimos las dependencias
+Lo llamaremos server.js. Añadimos las dependencias
 <p><img src="doc/img/dependencias.png" alt="dependencias"/>
 
 se accederá por el puerto 3000
@@ -25,7 +25,7 @@ le dices el puerto a escuchar, puerto por el cual se conectan los clientes en el
 <p><img src="doc/img/listener.png" alt="listener"/>
  
 #### Para arrancar el servidor
-node index.js
+node server.js
 
 ### Configuración del cliente
 Utilizamos index.html
