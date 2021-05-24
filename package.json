@@ -1,0 +1,23 @@
+{
+  "name": "socket.io-chat_tutorial",
+  "version": "1.0.0",
+  "description": "Se instala node.js\r Se instalan las dependencias\r - npm install socket.io\r - npm install express@4",
+  "main": "./server/index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "install": "npm install socket.io express@4",
+    "server": "node ./server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josele14/socket.io-tutorial.git"
+  },
+  "author": "JsLWorks",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/josele14/socket.io-tutorial/issues"
+  },
+  "homepage": "https://github.com/josele14/socket.io-tutorial#readme"
+}
