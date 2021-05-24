@@ -12,7 +12,7 @@ Utilizamos index.js. Añadimos las dependencias
 <p><img src="doc/img/dependencias.png" alt="dependencias"/>
 
 se accederá por el puerto 3000
-<p><img src="doc/img/puerto.png" alt="puerto"/>
+<p><img src="doc/img/var puerto.png" alt="puerto"/>
 
 se indica que la raíz será /index.html
 <p><img src="doc/img/route path raiz.png" alt="route path raiz"/>
@@ -22,7 +22,7 @@ emit envía un mensaje, en el caso de ponerle io delante se envía a todos los c
 <p><img src="doc/img/io connection, emit msg.png" alt="io connection, emit msg"/>
 
 le dices el puerto a escuchar, puerto por el cual se conectan los clientes en el navegador
-<p><img src="doc/img/listenner.png" alt="listenner"/>
+<p><img src="doc/img/listener.png" alt="listener"/>
  
 #### Para arrancar el servidor
 node index.js
