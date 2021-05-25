@@ -11,7 +11,7 @@ io.on("connection", socket => {
     const sessionID = socket.id;
     console.log(`New user ${sessionID} connected`);
     socket.on("disconnect", () => {
-        console.log("A user has disconnected")
+        console.log("A user has disconnected");
     });
     socket.on("chat message", msg => {
         console.log("message: " + msg);
