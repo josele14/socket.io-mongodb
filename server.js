@@ -8,7 +8,8 @@ app.get("/", (req, res) => {
 });
 
 io.on("connection", socket => {
-    console.log("New user connected");
+    const sessionID = socket.id;
+    console.log(`New user ${sessionID} connected`);
     socket.on("disconnect", () => {
         console.log("A user has disconnected")
     });
