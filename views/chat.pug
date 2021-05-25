@@ -68,19 +68,24 @@ html
         script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
         script.
             var socket = io();
+
             var messages = document.getElementById('messages');
             var form = document.getElementById('form');
             var input = document.getElementById('input');
+            var user = document.getElementById('username').innerHTML;
+
+            socket.emit("New user", user);
+
             form.addEventListener('submit', function (e) {
                 e.preventDefault();
                 if (input.value) {
-                    socket.emit('chat message', input.value);
+                    socket.emit('user message', {user: user, msg: input.value});
                     input.value = '';
                 }
             });
-            socket.on('chat message', function (msg) {
+            socket.on('srv message', data => {
                 let item = document.createElement('li');
-                item.textContent = msg;
+                item.textContent = (data.user).toUpperCase() + " > " + data.msg;
                 messages.appendChild(item);
                 window.scrollTo(0, document.body.scrollHeight);
             });

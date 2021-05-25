@@ -12,23 +12,29 @@ app.get("/", (req, res) => {
 });
 
 app.get("/chat", (req, res) => {
-    users.push({"username": req.query.username});  
+    users.push({ "username": req.query.username });
     // res.sendFile(__dirname + "/chat.html");
-    res.render("chat", {"username": req.query.username});
+    res.render("chat", { username: req.query.username });
 });
 
 io.on("connection", socket => {
-    const sessionID = socket.id;
-    console.log(`New user ${sessionID} connected`);
+    // const sessionID = socket.id;
+    // console.log(`New user ${sessionID} connected`);
+    socket.on("New user", user => {
+        console.log(user + " has connected");
+        let msg = user + " ENTERS INTO THE ROOM";
+        io.emit("srv message", {user: '', msg: msg});
+    });
     socket.on("disconnect", () => {
         console.log("A user has disconnected");
     });
-    socket.on("chat message", msg => {
-        console.log("message: " + msg);
-        io.emit("chat message", msg);
+    socket.on("user message", data => {
+        io.emit("srv message", {user: data.user, msg: data.msg });
     });
 });
 
-http.listen(port, ()=> {
+
+
+http.listen(port, () => {
     console.log(`Listening on ${port}`);
 });
