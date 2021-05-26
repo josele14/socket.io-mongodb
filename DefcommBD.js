@@ -29,7 +29,7 @@ class DefcommBD {
         if(debug) console.log("msg: " + msg);
         try {
             // Connect to the MongoDB cluster
-            await client.connect(() => {
+            client.connect(() => {
                 client.emit("send");
             });
             // insertOne document. Create a collection if not exists.
@@ -39,7 +39,7 @@ class DefcommBD {
                     msg: msg,
                     timestamp: Date.now()
                 };
-                let result = await client.db("ChatDB").collection("Room").insertOne(newMsg);
+                let result = client.db("ChatDB").collection("Room").insertOne(newMsg);
                 if (debug) console.log(`One document inserted with oid: ` + $(result.insertedId));
                 client.emit("ends");
             });
@@ -64,7 +64,7 @@ class DefcommBD {
     /** Initiliaze principal requirements for database connection */
     init() {
         this.uri = "mongodb+srv://cyohteam:developersjr2020@jslworks.hadha.mongodb.net/ChatDB?retryWrites=true&w=majority";
-        this.client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+        this.client = new MongoClient(this.uri, { useNewUrlParser: true, useUnifiedTopology: true });
     }
 }
 
