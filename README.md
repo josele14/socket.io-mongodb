@@ -38,5 +38,5 @@ Creamos la variables para recibir mensajes de chat y se añadimos un eventlisten
 Función que muestra los mensajes que se reciben
 <p><img src="doc/img/client emision mensajes.png" alt="client emision mensajes"/>
 
-## webología
+## webgrafía
 - socket io chat example: https://socket.io/get-started/chat
