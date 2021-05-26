@@ -1,27 +1,28 @@
 {
-  "name": "socket.io-chat_tutorial",
+  "name": "chat_mens",
   "version": "1.0.0",
-  "description": "Se instala node.js\r Se instalan las dependencias\r - npm install socket.io\r - npm install express@4",
+  "description": "Chat con mongodb, express4, node.js, socket.io",
   "main": "server.js",
   "directories": {
     "doc": "doc"
   },
   "scripts": {
-    "install": "npm install socket.io express@4 pug",
+    "install": "npm install socket.io express@4 pug mongodb",
     "server": "node server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/josele14/socket.io-tutorial.git"
+    "url": "git+https://github.com/josele14/socket.io-mongodb.git"
   },
   "author": "JsLWorks",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/josele14/socket.io-tutorial/issues"
+    "url": "https://github.com/josele14/socket.io-mongodb/issues"
   },
-  "homepage": "https://github.com/josele14/socket.io-tutorial#readme",
+  "homepage": "https://github.com/josele14/socket.io-mongodb#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "mongodb": "^3.6.8",
     "pug": "^3.0.2",
     "socket.io": "^4.1.2"
   }
