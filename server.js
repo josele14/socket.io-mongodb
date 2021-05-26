@@ -31,6 +31,19 @@ io.on("connection", socket => {
     socket.on("user message", data => {
         io.emit("srv message", {user: data.user, msg: data.msg });
         // database.send(data.user,data.msg);
+        // Send data to database script
+        $.ajax({
+            url: 'localhost:3100',
+            type: 'POST',
+            data: {user: data.user, msg: data.msg },
+            dataType: 'application/json; charset=utf-8',
+            success: function(result){
+            console.log('Ajax success transfer');
+          },
+          error: function(result){
+            console.error('Ajax fail transfer');
+          }
+        });
     });
 });
 

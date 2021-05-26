@@ -1,9 +1,3 @@
-const app = require('express')();
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
-const database = require('./DefcommBD');
-app.set('view engine', 'pug');
-let port = process.env.PORT || 3100;
 var MongoClient = require('mongodb').MongoClient;
 
 /** Connection URI. Update 'username', 'password', and 'your-cluster-url' to reflect your cluster.
@@ -62,9 +56,6 @@ async function getMessages() {
     // console.log(typeof (result));
     return result;
 }
-socket.on("srv message", data => {
-    this.send(data.user,data.msg);
-}).bind(this);
 
 http.listen(port, () => {
     console.log(`Listening on ${port}`);
