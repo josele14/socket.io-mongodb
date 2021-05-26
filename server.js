@@ -1,13 +1,11 @@
 const app = require('express')();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
-const DefcommDB = require('DefcommDB');
+// const database = require('./DefcommBD');
 app.set('view engine', 'pug');
 let port = process.env.PORT || 3000;
 
-const db = new DefcommDB();
-
-console.log(db);
+// console.log(database);
 
 app.get("/", (req, res) => {
     res.render("index", {});
@@ -32,6 +30,7 @@ io.on("connection", socket => {
     // User sent a message
     socket.on("user message", data => {
         io.emit("srv message", {user: data.user, msg: data.msg });
+        // database.send(data.user,data.msg);
     });
 });
 
