@@ -1,4 +1,4 @@
-# socket.io-tutorial
+# Chat con socket.io y MongoDB (aprendizaje)
 
 ## Pasos
 ### Instalaciones
