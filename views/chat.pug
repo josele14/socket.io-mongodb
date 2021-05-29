@@ -24,7 +24,15 @@ html
             p#username {
                 font-size: large;
                 font-weight: bold;
-                padding-right: 0.4em;
+                background: #BBB;
+                border: none;
+                padding: 0 0.6rem;
+                margin: 0.04rem;
+                border-radius: 3px;
+                outline: none;
+                color: #000;
+                min-height: 1.6em;
+                font-weight: bold;
             }
             #input {
                 border: none;
@@ -75,7 +83,7 @@ html
             p(id="username") #{username}
             input#input(autocomplete='off')
             button Send
-            button(id="room") Sala #{room}
+            button(id="room") Room #{room}
         script(src='/socket.io/socket.io.js')
         script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
         script.
@@ -87,13 +95,14 @@ html
 
             var user = document.getElementById('username').innerHTML;
             var room = document.getElementById('room').innerHTML;
+            room = room.slice(4, 6);
 
             socket.emit("New user", {user: user, room: room});
 
             form.addEventListener('submit', function (e) {
                 e.preventDefault();
                 if (input.value) {
-                    socket.emit('user message', {user: user, msg: input.value});
+                    socket.emit('user message', {user: user, msg: input.value, room: room});
                     input.value = '';
                 }
             });
