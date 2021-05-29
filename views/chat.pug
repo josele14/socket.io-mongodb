@@ -47,6 +47,17 @@ html
                 color: #fff;
                 min-height: 2.2em;
             }
+            button#room {
+                background: #fff;
+                border: none;
+                padding: 0 0.6rem;
+                margin: 0.04rem;
+                border-radius: 3px;
+                outline: none;
+                color: #000;
+                min-height: 1.6em;
+                font-weight: bold;
+            }
             #messages {
                 list-style-type: none;
                 margin: 0;
@@ -64,17 +75,20 @@ html
             p(id="username") #{username}
             input#input(autocomplete='off')
             button Send
+            button(id="room") Sala #{room}
         script(src='/socket.io/socket.io.js')
         script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
         script.
             var socket = io();
 
-            var messages = document.getElementById('messages');
             var form = document.getElementById('form');
             var input = document.getElementById('input');
-            var user = document.getElementById('username').innerHTML;
+            var messages = document.getElementById('messages');
 
-            socket.emit("New user", user);
+            var user = document.getElementById('username').innerHTML;
+            var room = document.getElementById('room').innerHTML;
+
+            socket.emit("New user", {user: user, room: room});
 
             form.addEventListener('submit', function (e) {
                 e.preventDefault();

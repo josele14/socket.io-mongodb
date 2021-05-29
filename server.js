@@ -12,8 +12,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/chat", (req, res) => {
-    // users.push({ "username": req.query.username });
-    res.render("chat", { username: req.query.username });
+    res.render("chat", { username: req.query.username, room: req.query.room });
 });
 
 io.on("connection", socket => {
@@ -32,18 +31,18 @@ io.on("connection", socket => {
         io.emit("srv message", {user: data.user, msg: data.msg });
         // database.send(data.user,data.msg);
         // Send data to database script
-        $.ajax({
-            url: 'localhost:3100',
-            type: 'POST',
-            data: {user: data.user, msg: data.msg },
-            dataType: 'application/json; charset=utf-8',
-            success: function(result){
-            console.log('Ajax success transfer');
-          },
-          error: function(result){
-            console.error('Ajax fail transfer');
-          }
-        });
+        // $.ajax({
+        //     url: 'localhost:3100',
+        //     type: 'POST',
+        //     data: {user: data.user, msg: data.msg },
+        //     dataType: 'application/json; charset=utf-8',
+        //     success: function(result){
+        //     console.log('Ajax success transfer');
+        //   },
+        //   error: function(result){
+        //     console.error('Ajax fail transfer');
+        //   }
+        // });
     });
 });
 
