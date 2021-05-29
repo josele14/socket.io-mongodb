@@ -56,4 +56,7 @@ html
           label(for='username')
             strong Username
           input(type='text' placeholder='Enter Username' name='username' required='')
+          select(name='room')
+            each n in [1,2,3,4]
+              option(value=n)= 'Sala ' + n
         button(type='submit') Login
