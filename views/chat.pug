@@ -97,7 +97,7 @@ html
             var room = document.getElementById('room').innerHTML;
             room = room.slice(4, 6);
 
-            socket.emit("New user", {user: user, room: room});
+            socket.emit("Join room", {user: user, room: room});
 
             form.addEventListener('submit', function (e) {
                 e.preventDefault();

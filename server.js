@@ -14,22 +14,25 @@ app.get("/chat", (req, res) => {
 
 /* SOCKET CONNECTIONS */
 io.on("connection", socket => {
-    /* New user connection event */
-    socket.on("New user", data => {
-        console.log(data.user + " has connected");
-        socket.join(data.room);
-        let msg = data.user + " ENTERS INTO THE ROOM" + data.room;
+    /* Joining room event */
+    socket.on("Join room", data => {
+        let msg = data.user + " enters into room" + data.room;
         console.log(msg)
-        io.emit("srv message", {user: '', msg: msg});
+        socket.join(data.room); // Join selected room
+        io.to(data.room).emit("srv message", {user: '', msg: msg});
     });
     /* User disconnection event */
     socket.on("disconnect", () => {
+        // socket.leave(data.room); // Leave selected room
         console.log("A user has disconnected");
     });
-    /* User message event */
+    /* User room message event */
     socket.on("user message", data => {
-        // Get room and send data       data.room -> recibir sala y gestionar la emisión de mensajes
-        io.emit("srv message", {user: data.user, msg: data.msg }); // esto emite a todos
+        // Emits user message to his/her room
+        io.to(data.room).emit("srv message", {
+            user: data.user,
+            msg: data.msg
+        });
     });
 });
 
