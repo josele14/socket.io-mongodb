@@ -102,7 +102,11 @@ html
             form.addEventListener('submit', function (e) {
                 e.preventDefault();
                 if (text.value) {
-                    socket.emit('user message', {user: user, msg: text.value, room: room});
+                    socket.emit('user message', {
+                        user: user,
+                        room: room,
+                        msg: text.value
+                    });
                     text.value = '';
                 }
             });
@@ -117,7 +121,7 @@ html
                 var data = {
                     username: $('p#username').html(),
                     room: $('button#room').html(),
-                    msg: $('input#text').val()
+                    msg: $('input#text').val(),
                 };
                 $.ajax({
                     type: 'GET',
@@ -125,8 +129,32 @@ html
                     contentType: "application/json",
                     data: data
                 })
-                .done((data) => {
-                    console.log(data);
+                .done((res_data) => {
+                    console.log(res_data);
+                    // Opcion 1 - MAL
+                    //- var socket = io();
+                    //- socket.on('connect', thesocket => {
+                    //-     console.log('res_data');
+                    //-     console.log(res_data);
+                    //-     if (res_data.msg) {
+                    //-         thesocket.emit('user message', {
+                    //-             user: res_data.user, 
+                    //-             room: res_data.room, 
+                    //-             msg: res_data.msg
+                    //-         });
+                    //-         $('input#text').val('')
+                    //-     }
+                    //- });
+                    
+                    // Opcion 2 - MAL
+                    //- if (res_data.msg) {
+                    //-     socket.emit('user message', {
+                    //-         user: res_data.user, 
+                    //-         room: res_data.room, 
+                    //-         msg: res_data.msg
+                    //-     });
+                    //-     $('input#text').val('')
+                    //- }
                 })
                 .fail((jqXHR, txtStatus, errorThrown) => {
                     console.log(
