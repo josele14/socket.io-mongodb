@@ -107,35 +107,36 @@ html
             });
             $(document).on('click', 'button', (e) => {
                 e.preventDefault(); // Void reload page 'when submit'
+                if (text.value) {
                 var data = {
                     username: $('p#username').html(),
                     room: $('button#room').html(),
                     msg: $('input#text').val(),
                 };
-                if (text.value) {
                     socket.emit('user message', {
                         user: user,
                         room: room,
                         msg: text.value
                     });
                     $('input#text').val('');
+                    
+                    $.ajax({
+                        type: 'GET',
+                        url: '/send',
+                        contentType: "application/json",
+                        data: data
+                    })
+                    .done((res_data) => {
+                        console.log('Data sended by server for ajax petition')
+                        console.log(res_data);
+                    })
+                    .fail((jqXHR, txtStatus, errorThrown) => {
+                        console.log(
+                            "The request failed:" +
+                            "\n\tAll AJAX request data \t jqXHR: " + jqXHR + "\n" +
+                            "\n\tType error description \t txtStatus: " + txtStatus + "\n" +
+                            "\n\tHTTP eror \t errorThrown: " + errorThrown
+                        );
+                    });
                 }
-                $.ajax({
-                    type: 'GET',
-                    url: '/send',
-                    contentType: "application/json",
-                    data: data
-                })
-                .done((res_data) => {
-                    console.log('Data sended by server for ajax petition')
-                    console.log(res_data);
-                })
-                .fail((jqXHR, txtStatus, errorThrown) => {
-                    console.log(
-                        "The request failed:" +
-                        "\n\tAll AJAX request data \t jqXHR: " + jqXHR + "\n" +
-                        "\n\tType error description \t txtStatus: " + txtStatus + "\n" +
-                        "\n\tHTTP eror \t errorThrown: " + errorThrown
-                    );
-                });
             });
