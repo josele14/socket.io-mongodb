@@ -81,7 +81,7 @@ html
         ul#messages
         form#form(action='')
             p(id="username") #{username}
-            input#text(autocomplete='off')
+            input#text(autocomplete='off' value='text')
             button Send
             button(id="room") Room #{room}
         script(src='/socket.io/socket.io.js')
