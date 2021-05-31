@@ -19,7 +19,7 @@ if (debug) console.log('--- DEBUG MODE ---');
  * @param {String} user Usename
  * @param {String} msg Text typed by this user
  */
-await function send(user, msg) {
+function send(user, msg) {
     if(debug) console.log("send");
     if(debug) console.log("user: " + user);
     if(debug) console.log("msg: " + msg);
@@ -50,7 +50,7 @@ await function send(user, msg) {
 }
 
 /** Get all data messages from the database */
-async function getMessages() {
+function getMessages() {
     let result = await client.db("ChatDB").collection("Room").findOne({});
     console.log(result);
     // console.log(typeof (result));
