@@ -19,13 +19,13 @@ if (debug) console.log('--- DEBUG MODE ---');
  * @param {String} user Usename
  * @param {String} msg Text typed by this user
  */
-function send(user, msg) {
+function send(user, room, msg) {
     if(debug) console.log("send");
     if(debug) console.log("user: " + user);
     if(debug) console.log("msg: " + msg);
     try {
         // Connect to the MongoDB cluster
-        await client.connect(() => {
+        client.connect(() => {
             client.emit("send");
         });
         // insertOne document. Create a collection if not exists.
@@ -35,7 +35,7 @@ function send(user, msg) {
                 msg: msg,
                 timestamp: Date.now()
             };
-            let result = await client.db("ChatDB").collection("Room").insertOne(newMsg);
+            let result = client.db("ChatDB").collection("Room").insertOne(newMsg);
             if (debug) console.log(`One document inserted with oid: ` + $(result.insertedId));
             client.emit("ends");
         });
@@ -51,12 +51,10 @@ function send(user, msg) {
 
 /** Get all data messages from the database */
 function getMessages() {
-    let result = await client.db("ChatDB").collection("Room").findOne({});
+    console.log('getMessages');
+    let result = client.db("ChatDB").collection("Room").findOne({});
     console.log(result);
     // console.log(typeof (result));
     return result;
 }
-
-http.listen(port, () => {
-    console.log(`Listening on ${port}`);
-});
+module.exports = { send: send, getMessages: getMessages}
