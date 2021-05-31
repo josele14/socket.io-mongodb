@@ -1,24 +1,43 @@
 const app = require('express')();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
+var mysql = require('mysql');
 app.set('view engine', 'pug');
 let port = process.env.PORT || 3000;
-const mongoScript = require('./mongo')
+
+/* MySQL */
+// Credentials
+const con = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "chatdb"
+});
+
+// Connect to database
+con.connect(function (err) {
+    if (err) throw err; // If not connects, throw error
+});
 
 /* ROUTES */
 app.get("/", (req, res) => {
     res.render("index", {});
 });
 app.get("/chat", (req, res) => {
-    res.render("chat", { username: req.query.username, room: req.query.room } );
+    res.render("chat", { username: req.query.username, room: req.query.room });
 });
 app.get("/send", (req, res) => {
-    console.log('Receive AJAX petition from ' + req.query.username)
-    res.send( {
-        username: req.query.username,
-        room: req.query.room, 
-        msg: req.query.msg
-    } );
+    console.log('Receive AJAX petition from ' + req.query.username);
+    let room = parseInt(req.query.room.slice(5, 6), 10);
+    let user = req.query.username;
+    let msg = req.query.msg
+    var sql = "INSERT INTO room (room, user, msg) VALUES (" +
+        room + ", '" + user + "', '" + msg + "')";
+    con.query(sql, function (err, result) {
+        if (err) throw err;
+        console.log("<OK> msg from " + user + " inserted into room " + room);
+    });
+    res.send({ username: user, room: room, msg: msg });
 });
 
 /* SOCKET CONNECTIONS */
@@ -28,7 +47,7 @@ io.on("connection", socket => {
         let msg = data.user + " enters into room" + data.room;
         console.log(msg)
         socket.join(data.room); // Join selected room
-        io.to(data.room).emit("srv message", {user: '', msg: msg});
+        io.to(data.room).emit("srv message", { user: '', msg: msg });
     });
     /* User disconnection event */
     socket.on("disconnect", () => {

@@ -1,13 +1,13 @@
 {
   "name": "chat_mens",
   "version": "1.0.0",
-  "description": "Chat con mongodb, express4, node.js, socket.io",
+  "description": "Chat con express4, node.js, socket.io",
   "main": "server.js",
   "directories": {
     "doc": "doc"
   },
   "scripts": {
-    "install": "npm install socket.io express@4 pug mongodb",
+    "install": "npm install socket.io express@4 pug",
     "server": "node server.js"
   },
   "repository": {
@@ -23,6 +23,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "mongodb": "^3.6.9",
+    "mysql": "^2.18.1",
     "pug": "^3.0.2",
     "socket.io": "^4.1.2"
   }
