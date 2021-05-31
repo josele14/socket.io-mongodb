@@ -99,17 +99,6 @@ html
 
             socket.emit("Join room", {user: user, room: room});
 
-            form.addEventListener('submit', function (e) {
-                e.preventDefault();
-                if (text.value) {
-                    socket.emit('user message', {
-                        user: user,
-                        room: room,
-                        msg: text.value
-                    });
-                    text.value = '';
-                }
-            });
             socket.on('srv message', data => {
                 let item = document.createElement('li');
                 item.textContent = (data.user).toUpperCase() + " > " + data.msg;
@@ -123,6 +112,14 @@ html
                     room: $('button#room').html(),
                     msg: $('input#text').val(),
                 };
+                if (text.value) {
+                    socket.emit('user message', {
+                        user: user,
+                        room: room,
+                        msg: text.value
+                    });
+                    $('input#text').val('');
+                }
                 $.ajax({
                     type: 'GET',
                     url: '/send',
@@ -130,31 +127,8 @@ html
                     data: data
                 })
                 .done((res_data) => {
+                    console.log('Data sended by server for ajax petition')
                     console.log(res_data);
-                    // Opcion 1 - MAL
-                    //- var socket = io();
-                    //- socket.on('connect', thesocket => {
-                    //-     console.log('res_data');
-                    //-     console.log(res_data);
-                    //-     if (res_data.msg) {
-                    //-         thesocket.emit('user message', {
-                    //-             user: res_data.user, 
-                    //-             room: res_data.room, 
-                    //-             msg: res_data.msg
-                    //-         });
-                    //-         $('input#text').val('')
-                    //-     }
-                    //- });
-                    
-                    // Opcion 2 - MAL
-                    //- if (res_data.msg) {
-                    //-     socket.emit('user message', {
-                    //-         user: res_data.user, 
-                    //-         room: res_data.room, 
-                    //-         msg: res_data.msg
-                    //-     });
-                    //-     $('input#text').val('')
-                    //- }
                 })
                 .fail((jqXHR, txtStatus, errorThrown) => {
                     console.log(

@@ -13,6 +13,7 @@ app.get("/chat", (req, res) => {
     res.render("chat", { username: req.query.username, room: req.query.room } );
 });
 app.get("/send", (req, res) => {
+    console.log('Receive AJAX petition from ' + req.query.username)
     res.send( {
         username: req.query.username,
         room: req.query.room, 
