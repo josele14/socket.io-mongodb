@@ -44,38 +44,6 @@ io.on("connection", socket => {
     });
 });
 
-// jQuery(document).on('click', 'button', () => {
-//     console.log('click')
-// })
-// $('form').on('submit', function (e) {
-
-//     var fD = {
-//         'userForm': $('#userForm').val(),
-//         'passwordForm': $('#passwordForm').val()
-//     };
-
-//     $.ajax({
-//         type: 'POST',
-//         data: fD,
-//         dataType: 'json',
-//         url: 'autenticar.php',
-    
-//     }).done((data) => {
-//         window.alert(data.msg);
-//         $('.inputForm').val("");
-//         // console.log(data.sis);
-
-//     }).fail((jqXHR, txtStatus, errorThrown) => {
-//         console.log(
-//         "The request failed: \n" +
-//         "All AJAX request data -> jqXHR: " + jqXHR + "\n" +
-//         "Type error description -> txtStatus: " + txtStatus + "\n" +
-//         "HTTP eror -> errorThrown: " + errorThrown);
-//     });
-//     // Evitamos que la página recargue tras realizar 'submit'
-//     e.preventDefault();
-// });
-
 /* SERVER LISTENING */
 http.listen(port, () => {
     console.log(`Listening on ${port}`);
