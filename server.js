@@ -26,6 +26,9 @@ app.get("/", (req, res) => {
 app.get("/chat", (req, res) => {
     res.render("chat", { username: req.query.username, room: req.query.room });
 });
+app.get("/camera", (req, res) => {
+    res.render("camera", { username: req.query.username, room: req.query.room });
+});
 app.get("/send", (req, res) => {
     console.log('Receive AJAX petition from ' + req.query.username);
     let room = parseInt(req.query.room.slice(5, 6), 10);
