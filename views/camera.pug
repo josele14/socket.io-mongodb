@@ -7,6 +7,7 @@ head
   title How to Integrate Webcam using JavaScript
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
   meta(http-equiv='X-UA-Compatible' content='ie=edge')
+  link(rel='preconnect' href='https://fonts.gstatic.com')
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
   style.
     * {
@@ -39,7 +40,7 @@ head
         padding: 10px 20px;
     }
   script(type='text/javascript').
-    var StopWebCam = function () {
+    var stop = function () {
         var stream = video.srcObject;
         var tracks = stream.getTracks();
         for (var i = 0; i < tracks.length; i++) {
@@ -57,7 +58,7 @@ head
                 video.srcObject = stream;
             })
             .catch(function (error) {
-            console.log("Something went wrong");
+                console.log("Something went wrong");
             });
         }
     }
@@ -66,5 +67,5 @@ head
   .video-outer
     video#video(height='100%' width='100%' autoplay='')
   .webcam-start-stop
-    a.btn-start(href='#!' onclick='start()') Start
-    a.btn-stop(href='#!' onclick='stop()') Stop
+    a.btn-start(onclick='start()') Start
+    a.btn-stop(onclick='stop()') Stop
