@@ -7,8 +7,9 @@
     "doc": "doc"
   },
   "scripts": {
-    "install": "npm install socket.io express@4 pug",
-    "server": "node server.js"
+    "install": "npm install socket.io express@4 pug browserify",
+    "server": "node server.js", 
+    "browserify": "browserify server.js -o bundle.js"
   },
   "repository": {
     "type": "git",
